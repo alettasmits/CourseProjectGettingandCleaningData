@@ -1,6 +1,5 @@
 ##make sure plyr package is active
 library(dplyr)
-library(knitr)
 
 ##DOWNLOAD THE FILE
 ##set the URL from which to download the file
@@ -70,7 +69,7 @@ FinalSet<-subset(nearlyDone,select=desiredColumnNames)
 FinalSetfinally<-aggregate(. ~subject + activity, FinalSet, mean)
 FinalSetfinally<-FinalSetfinally[order(FinalSetfinally$subject,FinalSetfinally$activity),]
 write.table(FinalSetfinally, file = "thisisthetidydata.txt",row.name=FALSE)
-##oh and write a codebook
-knit2html("codebook.Rmd")
+
+
 
 
