@@ -13,7 +13,7 @@ It should:
 * Create a second, independent tidy data set with the average of each variable for each activity and each subject.
 
 ##Files
-thisisthetidydataset.txt: the resulting dataset
-readme.md:  explanation of the assignment and the files
-codebook.rmd: explanation of the code
-run_analysis.R: script to perform analysis
+* thisisthetidydataset.txt: the resulting dataset
+* readme.md:  explanation of the assignment and the files
+* codebook.rmd: explanation of the code
+* run_analysis.R: script to perform analysis
