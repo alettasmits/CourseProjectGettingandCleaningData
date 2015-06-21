@@ -1,3 +1,24 @@
+##THESE ARE THE VARIABLES
+* fileURL: url of the file to be downloaded
+* f: filepath
+* train: filepath of the training files
+* test: filepath of the test files
+* subjectTraining: datafile (name refers to contents)
+* subjectTest: datafile (name refers to contents)
+* activityTraining: datafile (name refers to contents)
+* activityTest: datafile (name refers to contents)
+* labelsTraining: datafile (name refers to contents)
+* labelsTest: datafile (name refers to contents)
+* features: datafile (name refers to contents)
+* activityTotal: combined file of activityTraining and activityTest
+* subjectTotal: combined file of subjectTraining and subjectTest
+* labelsTotal: combined file of labelsTraining and labelsTest
+* nearlyDone: columns of the three TOTAL files combined
+* subSetNames: the set of columnnames that I want included in my final dataset from labelsTotal
+* desiredColumnNames: the set of column names from labelsTotal including 'subject' and 'activity'
+* FinalSet: The final dataset with all the desired columns
+* FinalSetfinally; the Final set with all the means calculated
+
 ##MAKE SURE DPLYR IS ACTIVE
 library(dplyr)
 
@@ -89,7 +110,7 @@ names(labelsTotal) <- features$V2
 nearlyDone <-cbind(labelsTotal,cbind(subjectTotal, activityTotal))
 
 ##FIND THE COLUMNS THAT ARE ABOUT MEAN OR STD
-*see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
+* see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
 
 subSetNames<-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]
 
@@ -98,6 +119,7 @@ desiredColumnNames<-c(as.character(subSetNames), "subject", "activity" )
 FinalSet<-subset(nearlyDone,select=desiredColumnNames)
 
 ##GET THE MEAN FOR EVERY SUBJECT AND EVERY ACTIVITY AND MAKE IT INTO A TIDY DATA SET
+* see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
 
 FinalSetfinally<-aggregate(. ~subject + activity, FinalSet, mean)
 FinalSetfinally<-FinalSetfinally[order(FinalSetfinally$subject,FinalSetfinally$activity),]
