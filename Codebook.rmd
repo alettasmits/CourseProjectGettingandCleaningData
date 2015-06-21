@@ -9,8 +9,11 @@ library(dplyr)
 * download the file from the URL and save it at the location referred to by f
 
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
+
 if(!file.exists("./data")){dir.create("./data")}
+
 f <- file.path(getwd(),"/data", "Dataset.zip")
+
 download.file(fileURL, f)
 
 ##UNZIP THE FILE; 
