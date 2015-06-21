@@ -16,6 +16,7 @@ download.file(fileURL, f)
 ##UNZIP THE FILE; 
 * The file will generate a folder named "UCI HAR Dataset"
 * Get the list of files in that folder
+
 unzip(zipfile="./data/Dataset.zip", exdir="./data/unzipped")
 
 ##GET THE FILENAMES AND READ THE RELEVANT FILES
@@ -27,6 +28,7 @@ unzip(zipfile="./data/Dataset.zip", exdir="./data/unzipped")
 * all the names of the variables are in features.txt
 * opening in txt yields weird signs so let's see what happens if we read them via R and make them into a table
 * Read the relevant files and first set a variable for the path
+
 train <- "./data/unzipped/UCI HAR Dataset/train"
 test <- "./data/unzipped/UCI HAR Dataset/test"
 subjectTraining <- read.table(file.path(train, "subject_train.txt"))
