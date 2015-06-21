@@ -1,4 +1,4 @@
-##THESE ARE THE VARIABLES
+#THESE ARE THE VARIABLES
 * fileURL: url of the file to be downloaded
 * f: filepath
 * train: filepath of the training files
@@ -18,6 +18,8 @@
 * desiredColumnNames: the set of column names from labelsTotal including 'subject' and 'activity'
 * FinalSet: The final dataset with all the desired columns
 * FinalSetfinally; the Final set with all the means calculated
+
+#THIS IS THE EXPLANATION OF THE CODE
 
 ##MAKE SURE DPLYR IS ACTIVE
 library(dplyr)
