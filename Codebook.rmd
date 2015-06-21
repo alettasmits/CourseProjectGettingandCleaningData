@@ -24,9 +24,9 @@ unzip(zipfile="./data/Dataset.zip", exdir="./data/unzipped")
 * traininginformation is in the file: train/X_train.txt
 * testinformation is in the file: test/X_test.txt 
 * labels for both sets are in: train/y_train.txt and test/y_test.txt
-* train/subject_train.txt' and test/subject_test.txt: Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30.
+* train/subject_train.txt and test/subject_test.txt
 * all the names of the variables are in features.txt
-* opening in txt yields weird signs so let's see what happens if we read them via R and make them into a table
+* opening in txt yields weird signs so lets see what happens if we read them via R and make them into a table
 * Read the relevant files and first set a variable for the path
 
 train <- "./data/unzipped/UCI HAR Dataset/train"
@@ -53,10 +53,12 @@ str(activityTraining)
 * activityTest en activityTraining have the same columns
 * featuresTest en featuresTraining havve the same columns
 * so we can combine them by rbind
+
 activityTotal <- rbind (activityTest, activityTraining)
 subjectTotal <-rbind(subjectTest, subjectTraining)
 labelsTotal <- rbind(labelsTest, labelsTraining)
 * and give headings to the columns to make it more readable
+
 names(subjectTotal) <- c("subject")
 names(activityTotal)<- c("activity")
 names(labelsTotal) <- features$V2
@@ -65,12 +67,15 @@ names(labelsTotal) <- features$V2
 nearlyDone <-cbind(labelsTotal,cbind(subjectTotal, activityTotal))
 * and find the columns that are about mean or std
 *see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
+
 subSetNames<-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]
 * and downsize the finalSet to just those columns
+
 desiredColumnNames<-c(as.character(subSetNames), "subject", "activity" )
 FinalSet<-subset(nearlyDone,select=desiredColumnNames)
 
 * get the mean for every subject and every activity and make it into a tidy data set
+
 FinalSetfinally<-aggregate(. ~subject + activity, FinalSet, mean)
 FinalSetfinally<-FinalSetfinally[order(FinalSetfinally$subject,FinalSetfinally$activity),]
 write.table(FinalSetfinally, file = "thisisthetidydata.txt",row.name=FALSE)
