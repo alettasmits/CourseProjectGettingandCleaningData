@@ -1,4 +1,4 @@
-##make sure plyr package is active
+##MAKE SURE DPLYR IS ACTIVE
 library(dplyr)
 
 ##FOR DOWNLOADING THE FILE
@@ -65,7 +65,7 @@ str(activityTest)
 
 str(activityTraining)
 
-##COMBINE THE RELEVANT FILES
+##COMBINE THE ROWS OF THE RELEVANT FILES
 * subjectTest and subjectTraining have the same columns
 * activityTest en activityTraining have the same columns
 * featuresTest en featuresTraining havve the same columns
@@ -77,7 +77,7 @@ subjectTotal <-rbind(subjectTest, subjectTraining)
 
 labelsTotal <- rbind(labelsTest, labelsTraining)
 
-* and give headings to the columns to make it more readable
+##CHANGE THE COLUMN NAMES
 
 names(subjectTotal) <- c("subject")
 
@@ -85,21 +85,19 @@ names(activityTotal)<- c("activity")
 
 names(labelsTotal) <- features$V2
 
-##Now combine the columns
+##COMBINE THE COLUMNS
 nearlyDone <-cbind(labelsTotal,cbind(subjectTotal, activityTotal))
 
-* and find the columns that are about mean or std
+##FIND THE COLUMNS THAT ARE ABOUT MEAN OR STD
 *see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
 
 subSetNames<-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]
-
-* and downsize the finalSet to just those columns
 
 desiredColumnNames<-c(as.character(subSetNames), "subject", "activity" )
 
 FinalSet<-subset(nearlyDone,select=desiredColumnNames)
 
-* get the mean for every subject and every activity and make it into a tidy data set
+##GET THE MEAN FOR EVERY SUBJECT AND EVERY ACTIVITY AND MAKE IT INTO A TIDY DATA SET
 
 FinalSetfinally<-aggregate(. ~subject + activity, FinalSet, mean)
 FinalSetfinally<-FinalSetfinally[order(FinalSetfinally$subject,FinalSetfinally$activity),]
