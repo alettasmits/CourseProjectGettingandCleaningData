@@ -16,7 +16,7 @@ f <- file.path(getwd(),"/data", "Dataset.zip")
 
 download.file(fileURL, f)
 
-##UNZIP THE FILE; 
+##UNZIP THE FILE
 * The file will generate a folder named "UCI HAR Dataset"
 * Get the list of files in that folder
 
@@ -33,22 +33,36 @@ unzip(zipfile="./data/Dataset.zip", exdir="./data/unzipped")
 * Read the relevant files and first set a variable for the path
 
 train <- "./data/unzipped/UCI HAR Dataset/train"
+
 test <- "./data/unzipped/UCI HAR Dataset/test"
+
 subjectTraining <- read.table(file.path(train, "subject_train.txt"))
+
 subjectTest <- read.table(file.path(test, "subject_test.txt"))
+
 activityTest <- read.table(file.path(test, "Y_test.txt"))
+
 activityTraining <- read.table(file.path(train, "Y_train.txt"))
+
 labelsTest  <- read.table(file.path(test, "X_test.txt" ),header = FALSE)
+
 labelsTraining <- read.table(file.path(train, "X_train.txt"),header = FALSE)
+
 features <- read.table(file.path("./data/unzipped/UCI HAR Dataset","features.txt"))
 
 ##INSPECT THE RELEVANT FILES
 str(labelsTest)
+
 str(labelsTraining)
+
 str(features)
+
 str(subjectTraining)
+
 str(subjectTest)
+
 str(activityTest)
+
 str(activityTraining)
 
 ##COMBINE THE RELEVANT FILES
@@ -58,23 +72,31 @@ str(activityTraining)
 * so we can combine them by rbind
 
 activityTotal <- rbind (activityTest, activityTraining)
+
 subjectTotal <-rbind(subjectTest, subjectTraining)
+
 labelsTotal <- rbind(labelsTest, labelsTraining)
+
 * and give headings to the columns to make it more readable
 
 names(subjectTotal) <- c("subject")
+
 names(activityTotal)<- c("activity")
+
 names(labelsTotal) <- features$V2
 
 ##Now combine the columns
 nearlyDone <-cbind(labelsTotal,cbind(subjectTotal, activityTotal))
+
 * and find the columns that are about mean or std
 *see also: https://rstudio-pubs-static.s3.amazonaws.com/37290_8e5a126a3a044b95881ae8df530da583.html)
 
 subSetNames<-features$V2[grep("mean\\(\\)|std\\(\\)", features$V2)]
+
 * and downsize the finalSet to just those columns
 
 desiredColumnNames<-c(as.character(subSetNames), "subject", "activity" )
+
 FinalSet<-subset(nearlyDone,select=desiredColumnNames)
 
 * get the mean for every subject and every activity and make it into a tidy data set
