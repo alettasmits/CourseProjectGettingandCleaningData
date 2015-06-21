@@ -2,10 +2,7 @@
 library(dplyr)
 
 ##FOR DOWNLOADING THE FILE
-####set the URL from which to download the file
-####check if there is a folder 'data'. if not create one
-####get a value for f, the file.path: the folder in which you are working now+/data+nameOftheFile
-####download the file from the URL and save it at the location referred to by f
+###set the URL from which to download the file, check if there is a folder 'data'. if not create one, get a value for f, the file.path: the folder in which you are working now+/data+nameOftheFile, download the file from the URL and save it at the location referred to by f
 
 fileURL <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
 if(!file.exists("./data")){dir.create("./data")}
