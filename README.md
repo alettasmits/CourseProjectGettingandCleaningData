@@ -15,5 +15,5 @@ It should:
 ##Files
 * thisisthetidydataset.txt: the resulting dataset
 * readme.md:  explanation of the assignment and the files
-* codebook.rmd: explanation of the code
+* codebook.rmd: explanation of the code including the variables
 * run_analysis.R: script to perform analysis
